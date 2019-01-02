@@ -18,7 +18,7 @@ class m180102_211324_geo_init extends Migration
         }
 
         $this->createTable('{{%tasks%}}', [
-
+            'id' => $this->primaryKey(), // Primary key ID
         ], $tableOptions);
 
     }
