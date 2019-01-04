@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m180103_211324_tasks
+ * Class m180103_201324_tasks
  */
-class m180103_211324_tasks extends Migration
+class m180103_201324_tasks extends Migration
 {
     /**
      * {@inheritdoc}
@@ -32,6 +32,18 @@ class m180103_211324_tasks extends Migration
             'status' => $this->integer(2)->notNull()->defaultValue(10), // Task status (int): 10 - Progress, 20 - Complete, 30 - Unsuccessfully, 40 - Suspended
         ], $tableOptions);
 
+        $this->addForeignKey(
+            'fk_tasks_to_users',
+            '{{%tasks%}}',
+            [
+                'owner_id',
+                'executor_id'
+            ],
+            '{{%users%}}',
+            'id',
+            'SET NULL',
+            'CASCADE'
+        );
     }
 
     /**

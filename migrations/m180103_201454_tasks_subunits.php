@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m180103_211454_tasks_subunits
+ * Class m180103_201454_tasks_subunits
  */
-class m180103_211454_tasks_subunits extends Migration
+class m180103_201454_tasks_subunits extends Migration
 {
     /**
      * {@inheritdoc}
@@ -28,6 +28,15 @@ class m180103_211454_tasks_subunits extends Migration
             'status' => $this->integer(2)->notNull()->defaultValue(10), // Subdivision status (int): 10 - Not Active, 20 - Active
         ], $tableOptions);
 
+        $this->addForeignKey(
+            'fk_subunits_to_users',
+            '{{%tasks_subunits%}}',
+            'owner_id',
+            '{{%users%}}',
+            'id',
+            'SET NULL',
+            'CASCADE'
+        );
     }
 
     /**

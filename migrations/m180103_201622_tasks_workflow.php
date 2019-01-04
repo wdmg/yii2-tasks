@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m180103_211622_tasks_workflow
+ * Class m180103_201622_tasks_workflow
  */
-class m180103_211622_tasks_workflow extends Migration
+class m180103_201622_tasks_workflow extends Migration
 {
     /**
      * {@inheritdoc}
@@ -21,7 +21,7 @@ class m180103_211622_tasks_workflow extends Migration
             'id' => $this->primaryKey(), // Primary key ID (int)
             'ticket_id' => $this->integer()->null(), // ID ticket (int) `tasks`.`id`
             'owner_id' => $this->integer()->notNull(), // Process created (int) `users`.`id`
-            'owner_id' => $this->integer()->null(), // Process performer (int) `users`.`id`
+            'assigned_id' => $this->integer()->null(), // Process performer (int) `users`.`id`
             'description' => $this->text(), // Process description (string)
             'deadline_at' => $this->datetime()->defaultExpression('CURRENT_TIMESTAMP'), // Process deadline date (timestamp)
             'started_at' => $this->datetime()->defaultExpression('CURRENT_TIMESTAMP'), // Process started date (timestamp)
@@ -31,6 +31,27 @@ class m180103_211622_tasks_workflow extends Migration
             'status' => $this->integer(2)->notNull()->defaultValue(10), // Process status (int): 10 - Started, 20 - Completed
         ], $tableOptions);
 
+        $this->addForeignKey(
+            'fk_workflow_to_tasks',
+            '{{%tasks_workflow%}}',
+            'task_id',
+            '{{%tasks%}}',
+            'id',
+            'SET NULL',
+            'CASCADE'
+        );
+        $this->addForeignKey(
+            'fk_workflow_to_users',
+            '{{%tasks_workflow%}}',
+            [
+                'owner_id',
+                'assigned_id'
+            ],
+            '{{%users%}}',
+            'id',
+            'SET NULL',
+            'CASCADE'
+        );
     }
 
     /**
