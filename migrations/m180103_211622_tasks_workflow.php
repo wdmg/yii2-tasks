@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m180102_211622_tasks_workflow
+ * Class m180103_211622_tasks_workflow
  */
-class m180102_211622_tasks_workflow extends Migration
+class m180103_211622_tasks_workflow extends Migration
 {
     /**
      * {@inheritdoc}
