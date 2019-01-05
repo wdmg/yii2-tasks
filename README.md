@@ -9,7 +9,7 @@ To install the module, run the following command in the console:
 # Migrations
 To execute the migration and create the initial data, run the following command in the console:
 
-`$ yii migrate --migrationPath=@vendor/wdmg/yii2-tasks/migrations`
+`$ php yii migrate --migrationPath=@vendor/wdmg/yii2-tasks/migrations`
 
 # Configure
 To add a module to the project, add the following data in your configuration file:
