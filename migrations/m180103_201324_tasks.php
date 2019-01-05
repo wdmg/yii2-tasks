@@ -32,18 +32,37 @@ class m180103_201324_tasks extends Migration
             'status' => $this->integer(2)->notNull()->defaultValue(10), // Task status (int): 10 - Progress, 20 - Complete, 30 - Unsuccessfully, 40 - Suspended
         ], $tableOptions);
 
-        $this->addForeignKey(
-            'fk_tasks_to_users',
+        $this->createIndex(
+            'idx_tasks',
             '{{%tasks%}}',
             [
+                'title',
+                'ticket_id',
                 'owner_id',
-                'executor_id'
-            ],
-            '{{%users%}}',
-            'id',
-            'SET NULL',
-            'CASCADE'
+                'executor_id',
+            ]
         );
+
+        if (!(Yii::$app->db->getTableSchema('{{%users%}}', true) === null)) {
+            $this->addForeignKey(
+                'fk_tasks_to_users_owner',
+                '{{%tasks%}}',
+                'owner_id',
+                '{{%users%}}',
+                'id',
+                'RESTRICT',
+                'CASCADE'
+            );
+            $this->addForeignKey(
+                'fk_tasks_to_users_executor',
+                '{{%tasks%}}',
+                'executor_id',
+                '{{%users%}}',
+                'id',
+                'RESTRICT',
+                'CASCADE'
+            );
+        }
     }
 
     /**
@@ -51,6 +70,17 @@ class m180103_201324_tasks extends Migration
      */
     public function safeDown()
     {
+        if (!(Yii::$app->db->getTableSchema('{{%users%}}', true) === null)) {
+            $this->dropForeignKey(
+                'fk_tasks_to_users_owner',
+                '{{%tasks%}}'
+            );
+            $this->dropForeignKey(
+                'fk_tasks_to_users_executor',
+                '{{%tasks%}}'
+            );
+        }
+
         $this->truncateTable('{{%tasks%}}');
         $this->dropTable('{{%tasks%}}');
     }
