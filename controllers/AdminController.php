@@ -7,7 +7,7 @@ use yii\web\Controller;
 /**
  * Default controller for the `tasks` module
  */
-class DefaultController extends Controller
+class AdminController extends Controller
 {
     /**
      * Renders the index view for the module
