@@ -24,6 +24,7 @@ To add a module to the project, add the following data in your configuration fil
         ...
         'tasks' => [
             'class' => 'wdmg\tasks\Module',
+            'routePrefix' => 'admin'
         ],
         ...
     ],
