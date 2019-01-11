@@ -37,6 +37,12 @@ To add a module to the project, add the following data in your configuration fil
         ...
     ],
 
+and Bootstrap section:
+
+`
+$config['bootstrap'][] = 'wdmg\tasks\Bootstrap';
+`
+
 # Routing
 `http://example.com/admin/tasks` - Module dashboard
 

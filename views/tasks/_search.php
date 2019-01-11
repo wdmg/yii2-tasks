@@ -4,21 +4,21 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model wdmg\tasks\models\TasksWorkflowSearch */
+/* @var $model wdmg\tasks\models\TasksSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h5 class="panel-title">
-            <a data-toggle="collapse" href="#tasksWorkflowSearch">
-                <span class="glyphicon glyphicon-search"></span> <?= Yii::t('app/modules/tasks', 'Workflow search') ?>
+            <a data-toggle="collapse" href="#tasksSearch">
+                <span class="glyphicon glyphicon-search"></span> <?= Yii::t('app/modules/tasks', 'Tasks search') ?>
             </a>
         </h5>
     </div>
-    <div id="tasksWorkflowSearch" class="panel-collapse collapse">
+    <div id="tasksSearch" class="panel-collapse collapse">
         <div class="panel-body">
-            <div class="tasks-workflow-search">
+            <div class="tasks-search">
 
                 <?php $form = ActiveForm::begin([
                     'action' => ['index'],
@@ -30,13 +30,15 @@ use yii\widgets\ActiveForm;
 
                 <?= $form->field($model, 'id') ?>
 
-                <?= $form->field($model, 'task_id') ?>
+                <?= $form->field($model, 'title') ?>
+
+                <?= $form->field($model, 'description') ?>
+
+                <?= $form->field($model, 'ticket_id') ?>
 
                 <?= $form->field($model, 'owner_id') ?>
 
-                <?= $form->field($model, 'assigned_id') ?>
-
-                <?= $form->field($model, 'description') ?>
+                <?php // echo $form->field($model, 'executor_id') ?>
 
                 <?php // echo $form->field($model, 'deadline_at') ?>
 

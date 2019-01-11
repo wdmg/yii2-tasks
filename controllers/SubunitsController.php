@@ -10,9 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TasksSubunitsController implements the CRUD actions for TasksSubunits model.
+ * SubunitsController implements the CRUD actions for TasksSubunits model.
  */
-class TasksSubunitsController extends Controller
+class SubunitsController extends Controller
 {
     /**
      * {@inheritdoc}

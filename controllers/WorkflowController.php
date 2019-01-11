@@ -10,9 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TasksWorkflowController implements the CRUD actions for TasksWorkflow model.
+ * WorkflowController implements the CRUD actions for TasksWorkflow model.
  */
-class TasksWorkflowController extends Controller
+class WorkflowController extends Controller
 {
     /**
      * {@inheritdoc}

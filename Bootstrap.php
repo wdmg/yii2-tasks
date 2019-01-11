@@ -3,6 +3,7 @@
 namespace wdmg\tasks;
 
 use yii\base\BootstrapInterface;
+use Yii;
 
 
 class Bootstrap implements BootstrapInterface
@@ -12,17 +13,17 @@ class Bootstrap implements BootstrapInterface
         // Get the module instance
         $module = Yii::$app->getModule('tasks');
 
-        // Add module URL rules.
+        // Get URL path prefix if exist
         $prefix = (isset($module->routePrefix) ? $module->routePrefix . '/' : '');
 
+        // Add module URL rules
         $app->getUrlManager()->addRules(
             [
-                $prefix.'<_m>' => '<_m>/admin/index',
+                $prefix.'<controller:(tasks|subunits)>/' => 'tasks/<controller>/index',
+                $prefix.'tasks/<controller:(tasks|subunits)>/<action:\w+>' => 'tasks/<controller>/<action>',
+                $prefix.'<controller:(tasks|subunits)>/<action:\w+>' => 'tasks/<controller>/<action>',
             ],
             false
         );
-
-        /*$app->controllerMap["migrate"]["class"] = 'yii\console\controllers\MigrateController';
-        $app->controllerMap["migrate"]["migrationNamespaces"][] = 'wdmg\tasks\migrations';*/
     }
 }
