@@ -58,7 +58,7 @@ class Tasks extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 255],
         ];
 
-        if(class_exists('\wdmg\tasks\models\Tasks'))
+        if(class_exists('\wdmg\tickets\models\Tickets') && isset(Yii::$app->modules['tickets']))
             $rules[] = [['ticket_id'], 'exist', 'skipOnError' => true, 'targetClass' => \wdmg\tickets\models\Tickets::className(), 'targetAttribute' => ['ticket_id' => 'id']];
 
         return $rules;
@@ -98,7 +98,7 @@ class Tasks extends \yii\db\ActiveRecord
      */
     public function getTicket()
     {
-        if(class_exists('\wdmg\tickets\models\Tickets'))
+        if(class_exists('\wdmg\tickets\models\Tickets') && isset(Yii::$app->modules['tickets']))
             return $this->hasOne(\wdmg\tickets\models\Tickets::className(), ['id' => 'ticket_id']);
         else
             return null;

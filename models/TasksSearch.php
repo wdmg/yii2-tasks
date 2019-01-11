@@ -2,6 +2,7 @@
 
 namespace wdmg\tasks\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use wdmg\tasks\models\Tasks;
@@ -23,8 +24,8 @@ class TasksSearch extends Tasks
     public function rules()
     {
         return [
-            [['id', 'ticket_id', 'owner_id', 'executor_id', 'status'], 'integer'],
-            [['title', 'description', 'deadline_at', 'started_at', 'completed_at', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'owner_id', 'executor_id', 'status'], 'integer'],
+            [['title', 'ticket_id', 'description', 'deadline_at', 'started_at', 'completed_at', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -65,7 +66,6 @@ class TasksSearch extends Tasks
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'ticket_id' => $this->ticket_id,
             'owner_id' => $this->owner_id,
             'executor_id' => $this->executor_id,
             'deadline_at' => $this->deadline_at,
@@ -76,8 +76,16 @@ class TasksSearch extends Tasks
             'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description]);
+
+        // custom search: get ticket_id requested by title
+        if(!is_int($this->ticket_id) && !empty($this->ticket_id) && (class_exists('\wdmg\tickets\models\Tickets') && isset(Yii::$app->modules['tickets']))) {
+            $ticket_id = \wdmg\tickets\models\Tickets::find()->andFilterWhere(['like', 'subject', $this->ticket_id])->one();
+            $query->andFilterWhere(['ticket_id' => $ticket_id['id']]);
+        } else {
+            $query->andFilterWhere(['ticket_id' => $this->ticket_id]);
+        }
+
+        $query->andFilterWhere(['like', 'title', $this->title])->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }
