@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model wdmg\tasks\models\Tasks */
 
-$this->title = Yii::t('app/modules/tasks', 'Update Tasks: {name}', [
+$this->title = Yii::t('app/modules/tasks', 'Update task: {name}', [
     'name' => $model->title,
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/tasks', 'Tasks'), 'url' => ['index']];

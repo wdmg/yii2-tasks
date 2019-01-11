@@ -29,7 +29,7 @@ class m180103_201324_tasks extends Migration
             'completed_at' => $this->datetime()->defaultExpression('CURRENT_TIMESTAMP'), // Task complated date (timestamp)
             'created_at' => $this->dateTime()->notNull()->defaultExpression('CURRENT_TIMESTAMP'), // Task created date (timestamp)
             'updated_at' => $this->datetime()->defaultExpression('CURRENT_TIMESTAMP'), // Task updated date (timestamp)
-            'status' => $this->integer(2)->notNull()->defaultValue(10), // Task status (int): 10 - Progress, 20 - Complete, 30 - Unsuccessfully, 40 - Suspended
+            'status' => $this->integer(2)->notNull()->defaultValue(10), // Task status (int): 10 - Wating, 20 - Progress, 30 - Complete, 40 - Unsuccessfully, 50 - Suspended, 60 - Canceled
         ], $tableOptions);
 
         $this->createIndex(

@@ -28,15 +28,104 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'title',
             'description:ntext',
-            'ticket_id',
+            [
+                'attribute' => 'ticket_id',
+                'format' => 'raw',
+                'header' => Yii::t('app/modules/tasks', 'Ticket'),
+                'value' => function($model) {
+                    if($model->ticket_id == $model->ticket['id'])
+                        return Html::a($model->ticket['subject'], ['../admin/tickets/view/?id='.$model->ticket['id']], [
+                            'target' => '_blank',
+                            'data-pjax' => 0
+                        ]);
+                    else
+                        return $model->id;
+                }
+            ],
             'owner_id',
-            //'executor_id',
-            //'deadline_at',
-            //'started_at',
-            //'completed_at',
-            //'created_at',
-            //'updated_at',
-            //'status',
+            'executor_id',
+
+
+            [
+                'attribute' => 'created_at',
+                'format' => 'datetime',
+                'headerOptions' => [
+                    'class' => 'text-center'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ]
+            ],
+            /*[
+                'attribute' => 'updated_at',
+                'format' => 'datetime',
+                'headerOptions' => [
+                    'class' => 'text-center'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ]
+            ],*/
+
+            [
+                'attribute' => 'deadline_at',
+                'format' => 'datetime',
+                'headerOptions' => [
+                    'class' => 'text-center'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ]
+            ],
+            /*[
+                'attribute' => 'started_at',
+                'format' => 'datetime',
+                'headerOptions' => [
+                    'class' => 'text-center'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ]
+            ],
+            [
+                'attribute' => 'completed_at',
+                'format' => 'datetime',
+                'headerOptions' => [
+                    'class' => 'text-center'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ]
+            ],*/
+            [
+                'attribute' => 'status',
+                'format' => 'html',
+                'filter' => false,
+                'headerOptions' => [
+                    'class' => 'text-center'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ],
+                'value' => function($data, $model) {
+
+                    if ($data->status == wdmg\tasks\models\Tasks::TS_STATUS_WATING)
+                        return '<span class="label label-default">'.Yii::t('app/modules/tasks','Wating').'</span>';
+                    elseif ($data->status == wdmg\tasks\models\Tasks::TS_STATUS_PROGRESS)
+                        return '<span class="label label-success">'.Yii::t('app/modules/tasks','Progress').'</span>';
+                    elseif ($data->status == wdmg\tasks\models\Tasks::TS_STATUS_COMPLETE)
+                        return '<b class="text-success">'.Yii::t('app/modules/tasks','Complete').'</b>';
+                    elseif ($data->status == wdmg\tasks\models\Tasks::TS_STATUS_UNSUCCESS)
+                        return '<span class="label label-danger">'.Yii::t('app/modules/tasks','Unsuccessfully').'</span>';
+                    elseif ($data->status == wdmg\tasks\models\Tasks::TS_STATUS_SUSPENDED)
+                        return '<span class="label label-warning">'.Yii::t('app/modules/tasks','Suspended').'</span>';
+                    elseif ($data->status == wdmg\tasks\models\Tasks::TS_STATUS_CANCELED)
+                        return '<b class="text-danger">'.Yii::t('app/modules/tasks','Canceled').'</b>';
+                    else
+                        return false;
+
+                },
+            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',

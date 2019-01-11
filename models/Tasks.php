@@ -25,6 +25,18 @@ use Yii;
  */
 class Tasks extends \yii\db\ActiveRecord
 {
+
+    /**
+     * Task status
+     * const, int: 10 - Wating, 20 - Progress, 30 - Complete, 40 - Unsuccessfully, 50 - Suspended, 60 - Canceled
+     */
+    const TS_STATUS_WATING = 10;
+    const TS_STATUS_PROGRESS = 20;
+    const TS_STATUS_COMPLETE = 30;
+    const TS_STATUS_UNSUCCESS = 40;
+    const TS_STATUS_SUSPENDED = 50;
+    const TS_STATUS_CANCELED = 60;
+
     /**
      * {@inheritdoc}
      */
@@ -38,13 +50,18 @@ class Tasks extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [
+        $rules = [
             [['description'], 'string'],
             [['ticket_id', 'owner_id', 'executor_id', 'status'], 'integer'],
             [['owner_id'], 'required'],
             [['deadline_at', 'started_at', 'completed_at', 'created_at', 'updated_at'], 'safe'],
             [['title'], 'string', 'max' => 255],
         ];
+
+        if(class_exists('\wdmg\tasks\models\Tasks'))
+            $rules[] = [['ticket_id'], 'exist', 'skipOnError' => true, 'targetClass' => \wdmg\tickets\models\Tickets::className(), 'targetAttribute' => ['ticket_id' => 'id']];
+
+        return $rules;
     }
 
     /**
@@ -79,8 +96,11 @@ class Tasks extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTickets()
+    public function getTicket()
     {
-        return $this->hasMany(Tickets::className(), ['task_id' => 'id']);
+        if(class_exists('\wdmg\tickets\models\Tickets'))
+            return $this->hasOne(\wdmg\tickets\models\Tickets::className(), ['id' => 'ticket_id']);
+        else
+            return null;
     }
 }

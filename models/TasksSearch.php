@@ -11,6 +11,12 @@ use wdmg\tasks\models\Tasks;
  */
 class TasksSearch extends Tasks
 {
+
+    /**
+     * @var model `Tickets`, if exist and available
+     */
+    public $ticket;
+
     /**
      * {@inheritdoc}
      */
