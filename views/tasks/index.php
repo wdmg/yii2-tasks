@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'executor_id',
 
 
-            [
+            /*[
                 'attribute' => 'created_at',
                 'format' => 'datetime',
                 'headerOptions' => [
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => [
                     'class' => 'text-center'
                 ]
-            ],
+            ],*/
             /*[
                 'attribute' => 'updated_at',
                 'format' => 'datetime',
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'text-center'
                 ]
             ],
-            /*[
+            [
                 'attribute' => 'started_at',
                 'format' => 'datetime',
                 'headerOptions' => [
@@ -96,7 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => [
                     'class' => 'text-center'
                 ]
-            ],*/
+            ],
             [
                 'attribute' => 'status',
                 'format' => 'html',

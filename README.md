@@ -2,10 +2,10 @@
 Task manager for Yii2
 
 # Requirements 
-* PHP 5.6
-* Yii2 (v.2.0.10)
+* PHP 5.6 or higher
+* Yii2 v.2.0.10 and newest
 * [Yii2 Tickets](https://github.com/wdmg/yii2-tickets) module (optionaly)
-* Yii2 Users module (optionaly)
+* [Yii2 Users](https://github.com/wdmg/yii2-users) module (optionaly)
 
 # Installation
 To install the module, run the following command in the console:
