@@ -40,6 +40,42 @@ class TasksController extends Controller
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function beforeAction($action)
+    {
+        $viewed = array();
+        $modules = array();
+        $session = Yii::$app->session;
+
+        if(!isset(Yii::$app->modules['users']))
+            $modules[] = '«Users»';
+
+        if(!isset(Yii::$app->modules['tickets']))
+            $modules[] = '«Tickets»';
+
+        if(isset($session['viewed-flash']) && is_array($session['viewed-flash']))
+            $viewed = $session['viewed-flash'];
+
+        if(count($modules) > 0 && !in_array('tasks-need-modules', $viewed) && is_array($viewed)) {
+            Yii::$app->getSession()->setFlash(
+                'warning',
+                Yii::t(
+                    'app/modules/tasks',
+                    'Some fields may contain limited information. We recommend installing the {modules} {count, plural, =1{module} one{module} few{modules} many{modules} other{modules}} for complete compatibility.',
+                    [
+                        'modules' => implode(', ', $modules),
+                        'count' => count($modules)
+                    ]
+                )
+            );
+            $session['viewed-flash'] = array_merge(array_unique($viewed), ['tasks-need-modules']);
+        }
+
+        return parent::beforeAction($action);
+    }
+
+    /**
      * Lists all Tasks models.
      * @return mixed
      */
