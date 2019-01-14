@@ -19,6 +19,16 @@ class TasksSearch extends Tasks
     public $ticket;
 
     /**
+     * @var model `Users`, if exist and available
+     */
+    public $owner;
+
+    /**
+     * @var model `Users`, if exist and available
+     */
+    public $executor;
+
+    /**
      * {@inheritdoc}
      */
     public function rules()

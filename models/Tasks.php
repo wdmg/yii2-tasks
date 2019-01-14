@@ -123,4 +123,26 @@ class Tasks extends \yii\db\ActiveRecord
         else
             return null;
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOwner()
+    {
+        if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']))
+            return $this->hasOne(\wdmg\users\models\Users::className(), ['id' => 'owner_id']);
+        else
+            return null;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getExecutor()
+    {
+        if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']))
+            return $this->hasOne(\wdmg\users\models\Users::className(), ['id' => 'executor_id']);
+        else
+            return null;
+    }
 }

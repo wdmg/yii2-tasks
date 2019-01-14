@@ -25,7 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
             'title',
             'description:ntext',
             [
@@ -34,38 +33,51 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => Yii::t('app/modules/tasks', 'Ticket'),
                 'value' => function($model) {
                     if($model->ticket_id == $model->ticket['id'])
-                        return Html::a($model->ticket['subject'], ['../admin/tickets/view/?id='.$model->ticket['id']], [
-                            'target' => '_blank',
-                            'data-pjax' => 0
-                        ]);
+                        if($model->ticket['id'] && $model->ticket['subject'])
+                            return Html::a($model->ticket['subject'], ['../admin/tickets/view/?id='.$model->ticket['id']], [
+                                'target' => '_blank',
+                                'data-pjax' => 0
+                            ]);
+                        else
+                            return $model->ticket_id;
                     else
-                        return $model->id;
+                        return $model->ticket_id;
                 }
             ],
-            'owner_id',
-            'executor_id',
-
-
-            /*[
-                'attribute' => 'created_at',
-                'format' => 'datetime',
-                'headerOptions' => [
-                    'class' => 'text-center'
-                ],
-                'contentOptions' => [
-                    'class' => 'text-center'
-                ]
-            ],*/
-            /*[
-                'attribute' => 'updated_at',
-                'format' => 'datetime',
-                'headerOptions' => [
-                    'class' => 'text-center'
-                ],
-                'contentOptions' => [
-                    'class' => 'text-center'
-                ]
-            ],*/
+            [
+                'attribute' => 'owner_id',
+                'format' => 'raw',
+                'header' => Yii::t('app/modules/tasks', 'Owner'),
+                'value' => function($model) {
+                    if($model->owner_id == $model->owner['id'])
+                        if($model->owner['id'] && $model->owner['username'])
+                            return Html::a($model->owner['username'], ['../admin/users/view/?id='.$model->owner['id']], [
+                                'target' => '_blank',
+                                'data-pjax' => 0
+                            ]);
+                        else
+                            return $model->owner_id;
+                    else
+                        return $model->owner_id;
+                }
+            ],
+            [
+                'attribute' => 'executor_id',
+                'format' => 'raw',
+                'header' => Yii::t('app/modules/tasks', 'Executor'),
+                'value' => function($model) {
+                    if($model->executor_id == $model->executor['id'])
+                        if($model->executor['id'] && $model->executor['username'])
+                            return Html::a($model->executor['username'], ['../admin/users/view/?id='.$model->executor['id']], [
+                                'target' => '_blank',
+                                'data-pjax' => 0
+                            ]);
+                        else
+                            return $model->executor_id;
+                    else
+                        return $model->executor_id;
+                }
+            ],
 
             [
                 'attribute' => 'deadline_at',
