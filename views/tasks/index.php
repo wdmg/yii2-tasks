@@ -107,19 +107,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => [
                     'class' => 'text-center'
                 ],
-                'value' => function($data, $model) {
+                'value' => function($data) {
 
-                    if ($data->status == wdmg\tasks\models\Tasks::TS_STATUS_WATING)
+                    if ($data->status == $data::TS_STATUS_WATING)
                         return '<span class="label label-default">'.Yii::t('app/modules/tasks','Wating').'</span>';
-                    elseif ($data->status == wdmg\tasks\models\Tasks::TS_STATUS_PROGRESS)
+                    elseif ($data->status == $data::TS_STATUS_PROGRESS)
                         return '<span class="label label-success">'.Yii::t('app/modules/tasks','Progress').'</span>';
-                    elseif ($data->status == wdmg\tasks\models\Tasks::TS_STATUS_COMPLETE)
+                    elseif ($data->status == $data::TS_STATUS_COMPLETE)
                         return '<b class="text-success">'.Yii::t('app/modules/tasks','Complete').'</b>';
-                    elseif ($data->status == wdmg\tasks\models\Tasks::TS_STATUS_UNSUCCESS)
+                    elseif ($data->status == $data::TS_STATUS_UNSUCCESS)
                         return '<span class="label label-danger">'.Yii::t('app/modules/tasks','Unsuccessfully').'</span>';
-                    elseif ($data->status == wdmg\tasks\models\Tasks::TS_STATUS_SUSPENDED)
+                    elseif ($data->status == $data::TS_STATUS_SUSPENDED)
                         return '<span class="label label-warning">'.Yii::t('app/modules/tasks','Suspended').'</span>';
-                    elseif ($data->status == wdmg\tasks\models\Tasks::TS_STATUS_CANCELED)
+                    elseif ($data->status == $data::TS_STATUS_CANCELED)
                         return '<b class="text-danger">'.Yii::t('app/modules/tasks','Canceled').'</b>';
                     else
                         return false;

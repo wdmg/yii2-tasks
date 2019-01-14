@@ -3,6 +3,7 @@
 namespace wdmg\tasks\models;
 
 use Yii;
+use \yii\behaviors\TimeStampBehavior;
 
 /**
  * This is the model class for table "tasks_subunits".

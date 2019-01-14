@@ -28,8 +28,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'completed_at')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList([
+        $model::TS_STATUS_WATING => Yii::t('app/modules/tasks','Wating'),
+        $model::TS_STATUS_PROGRESS => Yii::t('app/modules/tasks','Progress'),
+        $model::TS_STATUS_COMPLETE => Yii::t('app/modules/tasks','Complete'),
+        $model::TS_STATUS_UNSUCCESS => Yii::t('app/modules/tasks','Unsuccessfully'),
+        $model::TS_STATUS_SUSPENDED => Yii::t('app/modules/tasks','Suspended'),
+        $model::TS_STATUS_CANCELED => Yii::t('app/modules/tasks','Canceled'),
+    ]); ?>
 
+    <hr/>
     <div class="form-group">
         <?= Html::a(Yii::t('app/modules/tasks', '&larr; Back to list'), ['tasks/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
         <?= Html::submitButton(Yii::t('app/modules/tasks', 'Save'), ['class' => 'btn btn-success pull-right']) ?>
