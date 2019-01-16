@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use wdmg\helpers\DateAndTime;
 
 /* @var $this yii\web\View */
 /* @var $model wdmg\tasks\models\Tasks */
@@ -77,115 +78,55 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'deadline_at',
                 'format' => 'html',
                 'value' => function($data) {
-
-                    $datenow = new DateTime("now");
-                    $deadline = new DateTime($data->deadline_at);
-                    $interval = $datenow->diff($deadline);
-
-                    $along = Yii::t(
-                        'app/modules/tasks',
-                        '{y, plural, =0{} =1{# year} one{# year} few{# years} many{# years} other{# years}}{y, plural, =0{} =1{, } other{, }}{m, plural, =0{} =1{# month} one{# month} few{# months} many{# months} other{# months}}{m, plural, =0{} =1{, } other{, }}{d, plural, =0{} =1{# day} one{# day} few{# days} many{# days} other{# days}}{d, plural, =0{} =1{, } other{, }}{h, plural, =0{} =1{# hour} one{# hour} few{# hours} many{# hours} other{# hours}}{h, plural, =0{} =1{, } other{, }}{i, plural, =0{} =1{# minute} one{# minute} few{# minutes} many{# minutes} other{# minutes}}{i, plural, =0{} =1{, } other{, }}{s, plural, =0{} =1{# second} one{# second} few{# seconds} many{# seconds} other{# seconds}}{invert, plural, =0{ left} =1{ ago} other{}}',
-                        $interval
-                    );
-
-                    if($interval->invert == 1)
-                        $along = ' <small class="pull-right text-danger">[ ' . $along . ' ]</small>';
-                    else
-                        $along = ' <small class="pull-right text-success">[ ' . $along . ' ]</small>';
-
-                    return \Yii::$app->formatter->asDatetime($data->deadline_at) . $along;
+                    return \Yii::$app->formatter->asDatetime($data->deadline_at) . DateAndTime::diff($data->deadline_at." ", null, [
+                        'layout' => '<small class="pull-right {class}">[ {datetime} ]</small>',
+                        'inpastClass' => 'text-danger',
+                        'futureClass' => 'text-success',
+                    ]);
                 }
             ],
             [
                 'attribute' => 'started_at',
                 'format' => 'html',
                 'value' => function($data) {
-
-                    $datenow = new DateTime("now");
-                    $started = new DateTime($data->started_at);
-                    $interval = $datenow->diff($started);
-
-                    $along = Yii::t(
-                        'app/modules/tasks',
-                        '{y, plural, =0{} =1{# year} one{# year} few{# years} many{# years} other{# years}}{y, plural, =0{} =1{, } other{, }}{m, plural, =0{} =1{# month} one{# month} few{# months} many{# months} other{# months}}{m, plural, =0{} =1{, } other{, }}{d, plural, =0{} =1{# day} one{# day} few{# days} many{# days} other{# days}}{d, plural, =0{} =1{, } other{, }}{h, plural, =0{} =1{# hour} one{# hour} few{# hours} many{# hours} other{# hours}}{h, plural, =0{} =1{, } other{, }}{i, plural, =0{} =1{# minute} one{# minute} few{# minutes} many{# minutes} other{# minutes}}{i, plural, =0{} =1{, } other{, }}{s, plural, =0{} =1{# second} one{# second} few{# seconds} many{# seconds} other{# seconds}}{invert, plural, =0{ left} =1{ ago} other{}}',
-                        $interval
-                    );
-
-                    if($interval->invert == 1)
-                        $along = ' <small class="pull-right text-danger">[ ' . $along . ' ]</small>';
-                    else
-                        $along = ' <small class="pull-right text-success">[ ' . $along . ' ]</small>';
-
-                    return \Yii::$app->formatter->asDatetime($data->started_at) . $along;
+                    return \Yii::$app->formatter->asDatetime($data->started_at) . DateAndTime::diff($data->started_at." ", null, [
+                        'layout' => '<small class="pull-right {class}">[ {datetime} ]</small>',
+                        'inpastClass' => 'text-danger',
+                        'futureClass' => 'text-success',
+                    ]);
                 }
             ],
             [
                 'attribute' => 'completed_at',
                 'format' => 'html',
                 'value' => function($data) {
-
-                    $datenow = new DateTime("now");
-                    $completed = new DateTime($data->completed_at);
-                    $interval = $datenow->diff($completed);
-
-                    $along = Yii::t(
-                        'app/modules/tasks',
-                        '{y, plural, =0{} =1{# year} one{# year} few{# years} many{# years} other{# years}}{y, plural, =0{} =1{, } other{, }}{m, plural, =0{} =1{# month} one{# month} few{# months} many{# months} other{# months}}{m, plural, =0{} =1{, } other{, }}{d, plural, =0{} =1{# day} one{# day} few{# days} many{# days} other{# days}}{d, plural, =0{} =1{, } other{, }}{h, plural, =0{} =1{# hour} one{# hour} few{# hours} many{# hours} other{# hours}}{h, plural, =0{} =1{, } other{, }}{i, plural, =0{} =1{# minute} one{# minute} few{# minutes} many{# minutes} other{# minutes}}{i, plural, =0{} =1{, } other{, }}{s, plural, =0{} =1{# second} one{# second} few{# seconds} many{# seconds} other{# seconds}}{invert, plural, =0{ left} =1{ ago} other{}}',
-                        $interval
-                    );
-
-                    if($interval->invert == 1)
-                        $along = ' <small class="pull-right text-danger">[ ' . $along . ' ]</small>';
-                    else
-                        $along = ' <small class="pull-right text-success">[ ' . $along . ' ]</small>';
-
-                    return \Yii::$app->formatter->asDatetime($data->completed_at) . $along;
+                    return \Yii::$app->formatter->asDatetime($data->completed_at) . DateAndTime::diff($data->completed_at." ", null, [
+                        'layout' => '<small class="pull-right {class}">[ {datetime} ]</small>',
+                        'inpastClass' => 'text-danger',
+                        'futureClass' => 'text-success',
+                    ]);
                 }
             ],
             [
                 'attribute' => 'created_at',
                 'format' => 'html',
                 'value' => function($data) {
-
-                    $datenow = new DateTime("now");
-                    $created = new DateTime($data->created_at);
-                    $interval = $datenow->diff($created);
-
-                    $along = Yii::t(
-                        'app/modules/tasks',
-                        '{y, plural, =0{} =1{# year} one{# year} few{# years} many{# years} other{# years}}{y, plural, =0{} =1{, } other{, }}{m, plural, =0{} =1{# month} one{# month} few{# months} many{# months} other{# months}}{m, plural, =0{} =1{, } other{, }}{d, plural, =0{} =1{# day} one{# day} few{# days} many{# days} other{# days}}{d, plural, =0{} =1{, } other{, }}{h, plural, =0{} =1{# hour} one{# hour} few{# hours} many{# hours} other{# hours}}{h, plural, =0{} =1{, } other{, }}{i, plural, =0{} =1{# minute} one{# minute} few{# minutes} many{# minutes} other{# minutes}}{i, plural, =0{} =1{, } other{, }}{s, plural, =0{} =1{# second} one{# second} few{# seconds} many{# seconds} other{# seconds}}{invert, plural, =0{ left} =1{ ago} other{}}',
-                        $interval
-                    );
-
-                    if($interval->invert == 1)
-                        $along = ' <small class="pull-right text-danger">[ ' . $along . ' ]</small>';
-                    else
-                        $along = ' <small class="pull-right text-success">[ ' . $along . ' ]</small>';
-
-                    return \Yii::$app->formatter->asDatetime($data->created_at) . $along;
+                    return \Yii::$app->formatter->asDatetime($data->created_at) . DateAndTime::diff($data->created_at." ", null, [
+                            'layout' => '<small class="pull-right {class}">[ {datetime} ]</small>',
+                            'inpastClass' => 'text-danger',
+                            'futureClass' => 'text-success',
+                        ]);
                 }
             ],
             [
                 'attribute' => 'updated_at',
                 'format' => 'html',
                 'value' => function($data) {
-
-                    $datenow = new DateTime("now");
-                    $updated = new DateTime($data->updated_at);
-                    $interval = $datenow->diff($updated);
-
-                    $along = Yii::t(
-                        'app/modules/tasks',
-                        '{y, plural, =0{} =1{# year} one{# year} few{# years} many{# years} other{# years}}{y, plural, =0{} =1{, } other{, }}{m, plural, =0{} =1{# month} one{# month} few{# months} many{# months} other{# months}}{m, plural, =0{} =1{, } other{, }}{d, plural, =0{} =1{# day} one{# day} few{# days} many{# days} other{# days}}{d, plural, =0{} =1{, } other{, }}{h, plural, =0{} =1{# hour} one{# hour} few{# hours} many{# hours} other{# hours}}{h, plural, =0{} =1{, } other{, }}{i, plural, =0{} =1{# minute} one{# minute} few{# minutes} many{# minutes} other{# minutes}}{i, plural, =0{} =1{, } other{, }}{s, plural, =0{} =1{# second} one{# second} few{# seconds} many{# seconds} other{# seconds}}{invert, plural, =0{ left} =1{ ago} other{}}',
-                        $interval
-                    );
-
-                    if($interval->invert == 1)
-                        $along = ' <small class="pull-right text-danger">[ ' . $along . ' ]</small>';
-                    else
-                        $along = ' <small class="pull-right text-success">[ ' . $along . ' ]</small>';
-
-                    return \Yii::$app->formatter->asDatetime($data->updated_at) . $along;
+                    return \Yii::$app->formatter->asDatetime($data->updated_at) . DateAndTime::diff($data->updated_at." ", null, [
+                            'layout' => '<small class="pull-right {class}">[ {datetime} ]</small>',
+                            'inpastClass' => 'text-danger',
+                            'futureClass' => 'text-success',
+                        ]);
                 }
             ],
             [
