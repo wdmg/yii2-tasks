@@ -1,8 +1,10 @@
 Changelog
 =========
 
-## 1.0.3 (2019-01-10)
+## 1.0.3 (2019-01-20)
  * Added base CRUD interface
+ 
+## 1.0.2 (2019-01-10)
  * Added base modules, controllers, views
  
 ## 1.0.1 (2019-01-05)

@@ -47,6 +47,7 @@ $config['bootstrap'][] = 'wdmg\tasks\Bootstrap';
 `http://example.com/admin/tasks` - Module dashboard
 
 # Status and version
+v.1.0.3 - Added base CRUD interface
 v.1.0.2 - Added routing path to Bootstrap.
 v.1.0.1 - Added migrations path to Bootstrap.
 v.1.0.0 - Module in progress development.
