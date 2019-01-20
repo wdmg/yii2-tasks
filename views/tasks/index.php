@@ -15,6 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="tasks-index">
 
+    <?php var_dump(\wdmg\helpers\DateAndTime::sss()); ?>
+
     <?php Pjax::begin(); ?>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
