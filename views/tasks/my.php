@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel wdmg\tasks\models\TasksSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app/modules/tasks', 'Tasks');
+$this->title = Yii::t('app/modules/tasks', 'My tasks');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-header">
@@ -15,10 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="tasks-index">
 
-    <?php var_dump(\wdmg\helpers\DateAndTime::sss()); ?>
-
     <?php Pjax::begin(); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -44,23 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $model->ticket_id;
                     else
                         return $model->ticket_id;
-                }
-            ],
-            [
-                'attribute' => 'owner_id',
-                'format' => 'raw',
-                'header' => Yii::t('app/modules/tasks', 'Owner'),
-                'value' => function($model) {
-                    if($model->owner_id == $model->owner['id'])
-                        if($model->owner['id'] && $model->owner['username'])
-                            return Html::a($model->owner['username'], ['../admin/users/view/?id='.$model->owner['id']], [
-                                'target' => '_blank',
-                                'data-pjax' => 0
-                            ]);
-                        else
-                            return $model->owner_id;
-                    else
-                        return $model->owner_id;
                 }
             ],
             [

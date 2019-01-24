@@ -3,6 +3,10 @@
 return [
 
     'Tasks' => 'Задачи',
+    'All tasks' => 'Все задачи',
+    'My tasks' => 'Мои задачи',
+    'User tasks' => 'Задачи пользователя',
+    'User tasks: {name}' => 'Задачи пользователя: {name}',
     'Task' => 'Задача',
 
     'Tickets' => 'Тикеты',

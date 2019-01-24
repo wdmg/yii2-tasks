@@ -11,10 +11,16 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * TasksController implements the CRUD actions for Tasks model.
+ * ListController implements the CRUD actions for Tasks model.
  */
-class TasksController extends Controller
+class ListController extends Controller
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    public $defaultAction = 'all';
+
     /**
      * {@inheritdoc}
      */
@@ -72,6 +78,8 @@ class TasksController extends Controller
             $session['viewed-flash'] = array_merge(array_unique($viewed), ['tasks-need-modules']);
         }
 
+        parent::setViewPath('@vendor/wdmg/yii2-tasks/views/tasks');
+
         return parent::beforeAction($action);
     }
 
@@ -79,80 +87,49 @@ class TasksController extends Controller
      * Lists all Tasks models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionAll()
     {
         $searchModel = new TasksSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('all', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Tasks model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new Tasks model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Lists only current user Tasks models.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCurrent($id)
     {
         $model = new Tasks();
+        $searchModel = new TasksSearch();
+        $user = $model->getUser(intval($id));
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, intval($id));
 
-        return $this->render('create', [
-            'model' => $model,
+        return $this->render('current', [
+            'username' => $user->username,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Updates an existing Tasks model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * Lists only auth user Tasks models.
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionMy()
     {
-        $model = $this->findModel($id);
+        $searchModel = new TasksSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, Yii::$app->user->id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
+        return $this->render('my', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
-    }
-
-    /**
-     * Deletes an existing Tasks model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
     }
 
     /**

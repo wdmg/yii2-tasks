@@ -55,7 +55,7 @@ class TasksSearch extends Tasks
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $current_user = null)
     {
         $query = Tasks::find();
 
@@ -73,6 +73,10 @@ class TasksSearch extends Tasks
             return $dataProvider;
         }
 
+        // if need load custom user
+        if($current_user)
+            $this->owner_id = $current_user;
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -85,7 +89,6 @@ class TasksSearch extends Tasks
             'updated_at' => $this->updated_at,
             'status' => $this->status,
         ]);
-
 
         // custom search: get ticket_id requested by title
         if(!is_int($this->ticket_id) && !empty($this->ticket_id) && (class_exists('\wdmg\tickets\models\Tickets') && isset(Yii::$app->modules['tickets']))) {
