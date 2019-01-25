@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use wdmg\widgets\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model wdmg\tasks\models\Tasks */
@@ -22,11 +23,38 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'executor_id')->textInput() ?>
 
-    <?= $form->field($model, 'deadline_at')->textInput() ?>
+    <?= $form->field($model, 'deadline_at')->widget(DatePicker::className(), [
+        'options' => [
+            'class' => 'form-control'
+        ],
+        'pluginOptions' => [
+            'className' => '.datepicker',
+            'input' => '.form-control',
+            'toggle' => '.input-group-btn > button',
+        ]
+    ]); ?>
 
-    <?= $form->field($model, 'started_at')->textInput() ?>
+    <?= $form->field($model, 'started_at')->widget(DatePicker::className(), [
+        'options' => [
+            'class' => 'form-control'
+        ],
+        'pluginOptions' => [
+            'className' => '.datepicker',
+            'input' => '.form-control',
+            'toggle' => '.input-group-btn > button',
+        ]
+    ]); ?>
 
-    <?= $form->field($model, 'completed_at')->textInput() ?>
+    <?= $form->field($model, 'completed_at')->widget(DatePicker::className(), [
+        'options' => [
+            'class' => 'form-control'
+        ],
+        'pluginOptions' => [
+            'className' => '.datepicker',
+            'input' => '.form-control',
+            'toggle' => '.input-group-btn > button',
+        ]
+    ]); ?>
 
     <?= $form->field($model, 'status')->dropDownList([
         $model::TS_STATUS_WATING => Yii::t('app/modules/tasks','Wating'),
