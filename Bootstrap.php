@@ -19,11 +19,12 @@ class Bootstrap implements BootstrapInterface
         // Add module URL rules
         $app->getUrlManager()->addRules(
             [
-                $prefix.'<controller:(tasks|subunits)>/' => 'tasks/<controller>/index',
-                $prefix.'tasks/<controller:(tasks|subunits)>/<action:\w+>' => 'tasks/<controller>/<action>',
-                $prefix.'<controller:(tasks|subunits)>/<action:\w+>' => 'tasks/<controller>/<action>',
+                $prefix . '<module:tasks>/' => '<module>/list/all',
+                $prefix . '<module:tasks>/<controller:(list)>/' => '<module>/<controller>',
+                $prefix . '<module:tasks>/<controller:(list)>/<action:(all|my|current)>' => '<module>/<controller>/<action>',
+                $prefix . '<module:tasks>/<controller:(item)>/<action:(create|view|update|delete)>' => '<module>/<controller>/<action>',
             ],
-            false
+            true
         );
     }
 }

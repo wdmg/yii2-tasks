@@ -46,7 +46,14 @@ $config['bootstrap'][] = 'wdmg\tasks\Bootstrap';
 `
 
 # Routing
-`http://example.com/admin/tasks` - Module dashboard
+- `/admin/tasks/list/` - All tasks
+- `/admin/tasks/list/all/` - Some as all tasks
+- `/admin/tasks/list/my/` - Tasks of current auth user
+- `/admin/tasks/list/current/?id=100` - Tasks of selected user by User.ID
+- `/admin/tasks/item/create/` - Create new task
+- `/admin/tasks/item/view/?id=1` - View info of selected task by ID
+- `/admin/tasks/item/update/?id=1` - Edit selected task by ID
+- `/admin/tasks/item/delete/?id=1` - Delete selected task by ID
 
 # Status and version
 * v.1.0.3 - Added base CRUD interface

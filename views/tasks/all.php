@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     if($model->ticket_id == $model->ticket['id'])
                         if($model->ticket['id'] && $model->ticket['subject'])
-                            return Html::a($model->ticket['subject'], ['../admin/tickets/view/?id='.$model->ticket['id']], [
+                            return Html::a($model->ticket['subject'], ['../admin/tickets/item/view/?id='.$model->ticket['id']], [
                                 'target' => '_blank',
                                 'data-pjax' => 0
                             ]);
@@ -145,6 +145,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => [
                     'class' => 'text-center'
                 ],
+                'urlCreator' => function ($action, $model, $key, $index) {
+
+                    if ($action === 'view')
+                        return \yii\helpers\Url::toRoute(['item/view', 'id' => $key]);
+
+                    if ($action === 'update')
+                        return \yii\helpers\Url::toRoute(['item/update', 'id' => $key]);
+
+                    if ($action === 'delete')
+                        return \yii\helpers\Url::toRoute(['item/delete', 'id' => $key]);
+
+                }
             ],
         ],
         'pager' => [
@@ -171,8 +183,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
     <div>
-        <!-- ?= Html::a(Yii::t('app/modules/tickets', '&larr; Back to module'), ['../admin/tasks'], ['class' => 'btn btn-default pull-left']) ? -->
-        <?= Html::a(Yii::t('app/modules/tasks', 'Add new task'), ['create'], ['class' => 'btn btn-success pull-right']) ?>
+        <?= Html::a(Yii::t('app/modules/tasks', 'Add new task'), ['item/create'], ['class' => 'btn btn-success pull-right']) ?>
     </div>
     <?php Pjax::end(); ?>
 </div>

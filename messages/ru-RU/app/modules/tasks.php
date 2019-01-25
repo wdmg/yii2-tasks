@@ -11,6 +11,7 @@ return [
 
     'Tickets' => 'Тикеты',
     'Tasks search' => 'Поиск по задачам',
+    'Create task' => 'Новая задача',
     'Add new task' => 'Добавить новую задачу',
 
     'Title' => 'Заголовок',

@@ -39,7 +39,7 @@ use yii\widgets\ActiveForm;
 
     <hr/>
     <div class="form-group">
-        <?= Html::a(Yii::t('app/modules/tasks', '&larr; Back to list'), ['tasks/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
+        <?= Html::a(Yii::t('app/modules/tasks', '&larr; Back to list'), ['list/all'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
         <?= Html::submitButton(Yii::t('app/modules/tasks', 'Save'), ['class' => 'btn btn-success pull-right']) ?>
     </div>
 

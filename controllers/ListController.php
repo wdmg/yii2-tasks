@@ -78,6 +78,7 @@ class ListController extends Controller
             $session['viewed-flash'] = array_merge(array_unique($viewed), ['tasks-need-modules']);
         }
 
+        // Set custom view path
         parent::setViewPath('@vendor/wdmg/yii2-tasks/views/tasks');
 
         return parent::beforeAction($action);
@@ -107,7 +108,6 @@ class ListController extends Controller
         $model = new Tasks();
         $searchModel = new TasksSearch();
         $user = $model->getUser(intval($id));
-
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, intval($id));
 
         return $this->render('current', [

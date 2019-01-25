@@ -8,7 +8,7 @@ use wdmg\helpers\DateAndTime;
 /* @var $model wdmg\tasks\models\Tasks */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/tasks', 'Tasks'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/tasks', 'Tasks'), 'url' => ['list/all']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     if($model->ticket_id == $model->ticket['id'])
                         if($model->ticket['id'] && $model->ticket['subject'])
-                            return Html::a($model->ticket['subject'], ['../admin/tickets/view/?id='.$model->ticket['id']], [
+                            return Html::a($model->ticket['subject'], ['../admin/tickets/item/view/?id='.$model->ticket['id']], [
                                 'target' => '_blank',
                                 'data-pjax' => 0
                             ]);
@@ -156,9 +156,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <hr/>
     <div class="form-group">
-        <?= Html::a(Yii::t('app/modules/tasks', '&larr; Back to list'), ['tasks/index'], ['class' => 'btn btn-default']) ?>
-        <?= Html::a(Yii::t('app/modules/tasks', 'Edit'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app/modules/tasks', 'Delete'), ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('app/modules/tasks', '&larr; Back to list'), ['list/all'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
+        <?= Html::a(Yii::t('app/modules/tasks', 'Edit'), ['item/update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app/modules/tasks', 'Delete'), ['item/delete', 'id' => $model->id], [
             'class' => 'btn btn-danger pull-right',
             'data' => [
                 'confirm' => Yii::t('app/modules/tasks', 'Are you sure you want to delete this item?'),
