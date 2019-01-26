@@ -15,6 +15,7 @@ return [
     'Add new task' => 'Добавить новую задачу',
     'Change task status on' => 'Изменить статус задачи на',
 
+    'ID' => 'ИД',
     'Title' => 'Заголовок',
     'Description' => 'Описание',
     'Ticket' => 'Тикет',
