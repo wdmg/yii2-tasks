@@ -108,7 +108,19 @@ class ItemController extends Controller
     {
         $model = new Tasks();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            if($model->save())
+                Yii::$app->getSession()->setFlash(
+                    'success',
+                    Yii::t('app/modules/tasks', 'Task has been successfully created!')
+                );
+            else
+                Yii::$app->getSession()->setFlash(
+                    'danger',
+                    Yii::t('app/modules/tasks', 'An error occurred while creating the task.')
+                );
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -128,7 +140,19 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            if($model->save())
+                Yii::$app->getSession()->setFlash(
+                    'success',
+                    Yii::t('app/modules/tickets', 'Ticket has been successfully updated!')
+                );
+            else
+                Yii::$app->getSession()->setFlash(
+                    'danger',
+                    Yii::t('app/modules/tickets', 'An error occurred while updating the ticket.')
+                );
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -149,6 +173,40 @@ class ItemController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Update some fields in existing Tasks model.
+     * If updating is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionSet($id)
+    {
+        $model = $this->findModel($id);
+        $params = \Yii::$app->request->get();
+        $fields = $model->getAttributes();
+
+        if(is_array($params)) {
+            foreach ($params as $param => $value) {
+                if(array_key_exists($param, $fields))
+                    $model->setAttribute($param, $value);
+            }
+        }
+
+        if($model->update())
+            Yii::$app->getSession()->setFlash(
+                'success',
+                Yii::t('app/modules/tasks', 'Task has been successfully updated!')
+            );
+        else
+            Yii::$app->getSession()->setFlash(
+                'danger',
+                Yii::t('app/modules/tasks', 'An error occurred while updating the task.')
+            );
+
+        return $this->redirect(['view', 'id' => $model->id]);
     }
 
     /**

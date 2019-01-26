@@ -22,7 +22,7 @@ class Bootstrap implements BootstrapInterface
                 $prefix . '<module:tasks>/' => '<module>/list/all',
                 $prefix . '<module:tasks>/<controller:(list)>/' => '<module>/<controller>',
                 $prefix . '<module:tasks>/<controller:(list)>/<action:(all|my|current)>' => '<module>/<controller>/<action>',
-                $prefix . '<module:tasks>/<controller:(item)>/<action:(create|view|update|delete)>' => '<module>/<controller>/<action>',
+                $prefix . '<module:tasks>/<controller:(item)>/<action:(create|view|update|delete|set)>' => '<module>/<controller>/<action>',
             ],
             true
         );

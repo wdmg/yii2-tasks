@@ -155,6 +155,30 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <hr/>
+    <?php if ($model->status !== $model::TS_STATUS_COMPLETE && $model->status !== $model::TS_STATUS_UNSUCCESS) : ?>
+    <div class="form-group">
+        <label><?= Yii::t('app/modules/tasks', 'Change task status on') ?>: </label>
+        <?php
+            if($model->status !== $model::TS_STATUS_WATING)
+                echo Html::a(Yii::t('app/modules/tasks', 'Wating'), ['item/set/', 'id' => $model->id, 'status' => $model::TS_STATUS_WATING], ['class' => 'btn btn-default', 'style' => 'margin-left: 1rem;']);
+
+            if($model->status !== $model::TS_STATUS_PROGRESS)
+                echo Html::a(Yii::t('app/modules/tasks', 'Progress'), ['item/set/', 'id' => $model->id, 'status' => $model::TS_STATUS_PROGRESS], ['class' => 'btn btn-success', 'style' => 'margin-left: 1rem;']);
+
+            if($model->status !== $model::TS_STATUS_COMPLETE)
+                echo Html::a(Yii::t('app/modules/tasks', 'Complete'), ['item/set/', 'id' => $model->id, 'status' => $model::TS_STATUS_COMPLETE], ['class' => 'btn btn-success', 'style' => 'margin-left: 1rem;']);
+
+            if($model->status !== $model::TS_STATUS_SUSPENDED)
+                echo Html::a(Yii::t('app/modules/tasks', 'Suspended'), ['item/set/', 'id' => $model->id, 'status' => $model::TS_STATUS_SUSPENDED], ['class' => 'btn btn-warning', 'style' => 'margin-left: 1rem;']);
+
+            if($model->status !== $model::TS_STATUS_CANCELED)
+                echo Html::a(Yii::t('app/modules/tasks', 'Canceled'), ['item/set/', 'id' => $model->id, 'status' => $model::TS_STATUS_CANCELED], ['class' => 'btn btn-danger', 'style' => 'margin-left: 1rem;']);
+
+        ?>&nbsp;
+    </div>
+    <hr/>
+    <?php endif; ?>
+
     <div class="form-group">
         <?= Html::a(Yii::t('app/modules/tasks', '&larr; Back to list'), ['list/all'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
         <?= Html::a(Yii::t('app/modules/tasks', 'Edit'), ['item/update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

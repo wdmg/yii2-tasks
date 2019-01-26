@@ -13,6 +13,7 @@ return [
     'Tasks search' => 'Поиск по задачам',
     'Create task' => 'Новая задача',
     'Add new task' => 'Добавить новую задачу',
+    'Change task status on' => 'Изменить статус задачи на',
 
     'Title' => 'Заголовок',
     'Description' => 'Описание',
@@ -39,6 +40,12 @@ return [
 
     'View task: {name}' => 'Просмотр задачи: {name}',
     'Update task: {name}' => 'Редактирование задачи: {name}',
+
+    'Task has been successfully updated!' => 'Задача была успешно обновлена!',
+    'An error occurred while updating the task.' => 'Произошла ошибка при обновлении задачи.',
+    'Task has been successfully created!' => 'Задача была успешно создана!',
+    'An error occurred while creating the task.' => 'Произошла ошибка при создании задачи.',
+
 
     'Update' => 'Обновить',
     'Edit' => 'Редактировать',
