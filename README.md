@@ -56,6 +56,7 @@ $config['bootstrap'][] = 'wdmg\tasks\Bootstrap';
 - `/admin/tasks/item/delete/?id=1` - Delete selected task by ID
 
 # Status and version
+* v.1.0.4 - Bugfix and refactoring
 * v.1.0.3 - Added base CRUD interface
 * v.1.0.2 - Added routing path to Bootstrap.
 * v.1.0.1 - Added migrations path to Bootstrap.
