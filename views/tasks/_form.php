@@ -31,6 +31,7 @@ use wdmg\widgets\DatePicker;
             'className' => '.datepicker',
             'input' => '.form-control',
             'toggle' => '.input-group-btn > button',
+            'format' => 'YYYY-MM-DD HH:mm:ss'
         ]
     ]); ?>
 
@@ -42,6 +43,7 @@ use wdmg\widgets\DatePicker;
             'className' => '.datepicker',
             'input' => '.form-control',
             'toggle' => '.input-group-btn > button',
+            'format' => 'YYYY-MM-DD HH:mm:ss'
         ]
     ]); ?>
 
@@ -53,6 +55,7 @@ use wdmg\widgets\DatePicker;
             'className' => '.datepicker',
             'input' => '.form-control',
             'toggle' => '.input-group-btn > button',
+            'format' => 'YYYY-MM-DD HH:mm:ss'
         ]
     ]); ?>
 
