@@ -17,7 +17,7 @@ class m180103_201454_tasks_subunits extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%tasks_subunits%}}', [
+        $this->createTable('{{%tasks_subunits}}', [
             'id' => $this->primaryKey(), // Primary key ID (int)
             'title' => $this->string(255), // Subdivision title (string)
             'description' => $this->text(), // Subdivision description (string)
@@ -30,19 +30,19 @@ class m180103_201454_tasks_subunits extends Migration
 
         $this->createIndex(
             'idx_tasks_subunits',
-            '{{%tasks_subunits%}}',
+            '{{%tasks_subunits}}',
             [
                 'title',
                 'owner_id',
             ]
         );
 
-        if (!(Yii::$app->db->getTableSchema('{{%users%}}', true) === null)) {
+        if (!(Yii::$app->db->getTableSchema('{{%users}}', true) === null)) {
             $this->addForeignKey(
                 'fk_subunits_to_users_owner',
-                '{{%tasks_subunits%}}',
+                '{{%tasks_subunits}}',
                 'owner_id',
-                '{{%users%}}',
+                '{{%users}}',
                 'id',
                 'RESTRICT',
                 'CASCADE'
@@ -55,14 +55,14 @@ class m180103_201454_tasks_subunits extends Migration
      */
     public function safeDown()
     {
-        if (!(Yii::$app->db->getTableSchema('{{%users%}}', true) === null)) {
+        if (!(Yii::$app->db->getTableSchema('{{%users}}', true) === null)) {
             $this->dropForeignKey(
                 'fk_subunits_to_users_owner',
-                '{{%tasks_subunits%}}'
+                '{{%tasks_subunits}}'
             );
         }
 
-        $this->truncateTable('{{%tasks_subunits%}}');
-        $this->dropTable('{{%tasks_subunits%}}');
+        $this->truncateTable('{{%tasks_subunits}}');
+        $this->dropTable('{{%tasks_subunits}}');
     }
 }

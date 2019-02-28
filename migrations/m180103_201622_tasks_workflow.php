@@ -17,7 +17,7 @@ class m180103_201622_tasks_workflow extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%tasks_workflow%}}', [
+        $this->createTable('{{%tasks_workflow}}', [
             'id' => $this->primaryKey(), // Primary key ID (int)
             'task_id' => $this->integer()->notNull(), // Task ID (int) `tasks`.`id`
             'owner_id' => $this->integer()->notNull(), // Process created (int) `users`.`id`
@@ -33,7 +33,7 @@ class m180103_201622_tasks_workflow extends Migration
 
         $this->createIndex(
             'idx_tasks_workflow',
-            '{{%tasks_workflow%}}',
+            '{{%tasks_workflow}}',
             [
                 'task_id',
                 'owner_id',
@@ -41,33 +41,33 @@ class m180103_201622_tasks_workflow extends Migration
             ]
         );
 
-        if (!(Yii::$app->db->getTableSchema('{{%tasks%}}', true) === null)) {
+        if (!(Yii::$app->db->getTableSchema('{{%tasks}}', true) === null)) {
             $this->addForeignKey(
                 'fk_workflow_to_tasks',
-                '{{%tasks_workflow%}}',
+                '{{%tasks_workflow}}',
                 'task_id',
-                '{{%tasks%}}',
+                '{{%tasks}}',
                 'id',
                 'RESTRICT',
                 'CASCADE'
             );
         }
 
-        if (!(Yii::$app->db->getTableSchema('{{%users%}}', true) === null)) {
+        if (!(Yii::$app->db->getTableSchema('{{%users}}', true) === null)) {
             $this->addForeignKey(
                 'fk_workflow_to_users_owner',
-                '{{%tasks_workflow%}}',
+                '{{%tasks_workflow}}',
                 'owner_id',
-                '{{%users%}}',
+                '{{%users}}',
                 'id',
                 'RESTRICT',
                 'CASCADE'
             );
             $this->addForeignKey(
                 'fk_workflow_to_users_assigned',
-                '{{%tasks_workflow%}}',
+                '{{%tasks_workflow}}',
                 'assigned_id',
-                '{{%users%}}',
+                '{{%users}}',
                 'id',
                 'RESTRICT',
                 'CASCADE'
@@ -82,21 +82,21 @@ class m180103_201622_tasks_workflow extends Migration
     {
         $this->dropForeignKey(
             'fk_workflow_to_tasks',
-            '{{%tasks_workflow%}}'
+            '{{%tasks_workflow}}'
         );
 
-        if (!(Yii::$app->db->getTableSchema('{{%users%}}', true) === null)) {
+        if (!(Yii::$app->db->getTableSchema('{{%users}}', true) === null)) {
             $this->dropForeignKey(
                 'fk_workflow_to_users_owner',
-                '{{%tasks_workflow%}}'
+                '{{%tasks_workflow}}'
             );
             $this->dropForeignKey(
                 'fk_workflow_to_users_assigned',
-                '{{%tasks_workflow%}}'
+                '{{%tasks_workflow}}'
             );
         }
 
-        $this->truncateTable('{{%tasks_workflow%}}');
-        $this->dropTable('{{%tasks_workflow%}}');
+        $this->truncateTable('{{%tasks_workflow}}');
+        $this->dropTable('{{%tasks_workflow}}');
     }
 }

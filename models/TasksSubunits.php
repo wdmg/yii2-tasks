@@ -24,7 +24,7 @@ class TasksSubunits extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{tasks_subunits}}';
+        return '{{%tasks_subunits}}';
     }
 
     /**

@@ -17,7 +17,7 @@ class m180103_201324_tasks extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%tasks%}}', [
+        $this->createTable('{{%tasks}}', [
             'id' => $this->primaryKey(), // Primary key ID (int)
             'title' => $this->string(255), // Region title (string)
             'description' => $this->text(), // Task description (string)
@@ -34,7 +34,7 @@ class m180103_201324_tasks extends Migration
 
         $this->createIndex(
             'idx_tasks',
-            '{{%tasks%}}',
+            '{{%tasks}}',
             [
                 'title',
                 'ticket_id',
@@ -43,21 +43,21 @@ class m180103_201324_tasks extends Migration
             ]
         );
 
-        if (!(Yii::$app->db->getTableSchema('{{%users%}}', true) === null)) {
+        if (!(Yii::$app->db->getTableSchema('{{%users}}', true) === null)) {
             $this->addForeignKey(
                 'fk_tasks_to_users_owner',
-                '{{%tasks%}}',
+                '{{%tasks}}',
                 'owner_id',
-                '{{%users%}}',
+                '{{%users}}',
                 'id',
                 'RESTRICT',
                 'CASCADE'
             );
             $this->addForeignKey(
                 'fk_tasks_to_users_executor',
-                '{{%tasks%}}',
+                '{{%tasks}}',
                 'executor_id',
-                '{{%users%}}',
+                '{{%users}}',
                 'id',
                 'RESTRICT',
                 'CASCADE'
@@ -70,18 +70,18 @@ class m180103_201324_tasks extends Migration
      */
     public function safeDown()
     {
-        if (!(Yii::$app->db->getTableSchema('{{%users%}}', true) === null)) {
+        if (!(Yii::$app->db->getTableSchema('{{%users}}', true) === null)) {
             $this->dropForeignKey(
                 'fk_tasks_to_users_owner',
-                '{{%tasks%}}'
+                '{{%tasks}}'
             );
             $this->dropForeignKey(
                 'fk_tasks_to_users_executor',
-                '{{%tasks%}}'
+                '{{%tasks}}'
             );
         }
 
-        $this->truncateTable('{{%tasks%}}');
-        $this->dropTable('{{%tasks%}}');
+        $this->truncateTable('{{%tasks}}');
+        $this->dropTable('{{%tasks}}');
     }
 }

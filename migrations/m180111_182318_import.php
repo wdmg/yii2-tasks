@@ -14,7 +14,7 @@ class m180111_182318_import extends Migration
     {
 
         for ($i = 1; $i <= 10; $i++) {
-            $this->insert('{{tasks}}', [
+            $this->insert('{{%tasks}}', [
                 'title' => 'Test task #'.$i,
                 'description' => 'The description of '.$i.' task',
                 'ticket_id' => rand(5, 8),
@@ -30,7 +30,7 @@ class m180111_182318_import extends Migration
         }
 
         for ($i = 1; $i <= 3; $i++) {
-            $this->insert('{{tasks_subunits}}', [
+            $this->insert('{{%tasks_subunits}}', [
                 'title' => 'Some subdivision #'.$i,
                 'description' => 'Some subdivision description',
                 'owner_id' => 100,
@@ -42,7 +42,7 @@ class m180111_182318_import extends Migration
         }
 
         for ($i = 1; $i <= 5; $i++) {
-            $this->insert('{{tasks_workflow}}', [
+            $this->insert('{{%tasks_workflow}}', [
                 'task_id' => rand(1, 6),
                 'owner_id' => 100,
                 'assigned_id' => (100+$i),

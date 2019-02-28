@@ -29,7 +29,7 @@ class TasksWorkflow extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{tasks_workflow}}';
+        return '{{%tasks_workflow}}';
     }
 
     /**
