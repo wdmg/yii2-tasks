@@ -46,16 +46,21 @@ $config['bootstrap'][] = 'wdmg\tasks\Bootstrap';
 `
 
 # Routing
-- `/admin/tasks/list/` - All tasks
-- `/admin/tasks/list/all/` - Some as all tasks
-- `/admin/tasks/list/my/` - Tasks of current auth user
-- `/admin/tasks/list/current/?id=100` - Tasks of selected user by User.ID
-- `/admin/tasks/item/create/` - Create new task
-- `/admin/tasks/item/view/?id=1` - View info of selected task by ID
-- `/admin/tasks/item/update/?id=1` - Edit selected task by ID
-- `/admin/tasks/item/delete/?id=1` - Delete selected task by ID
+Use the `Module::dashboardNavItems()` method of the module to generate a navigation items list for NavBar, like this:
+
+    <?php
+        echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+            'label' => 'Modules',
+            'items' => [
+                Yii::$app->getModule('tasks')->dashboardNavItems(),
+                ...
+            ]
+        ]);
+    ?>
 
 # Status and version [in progress development]
+* v.1.0.6 - Added dashboard navigation items for NavBar
 * v.1.0.5 - Fixing tables names in migrations
 * v.1.0.4 - Bugfix and refactoring
 * v.1.0.3 - Added base CRUD interface
