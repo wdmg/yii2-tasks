@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'description',
                 'format' => 'raw',
                 'value' => function($model) {
-                    return strip_tags($model->description);
+                    return mb_strimwidth(strip_tags($model->description), 0, 120, '…');
                 }
             ],
             [
