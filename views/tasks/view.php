@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\HtmlPurifier;
 use yii\widgets\DetailView;
 use wdmg\helpers\DateAndTime;
 
@@ -22,7 +23,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'description:ntext',
+            [
+                'attribute' => 'description',
+                'format' => 'html',
+                'value' => function($model) {
+                    $purifier = new HtmlPurifier;
+                    return $purifier->process($model->description);
+                }
+            ],
             [
                 'attribute' => 'ticket_id',
                 'format' => 'html',

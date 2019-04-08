@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use wdmg\widgets\DatePicker;
+use wdmg\widgets\Editor;
 
 /* @var $this yii\web\View */
 /* @var $model wdmg\tasks\models\Tasks */
@@ -15,7 +16,10 @@ use wdmg\widgets\DatePicker;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description')->widget(Editor::className(), [
+        'options' => [],
+        'pluginOptions' => []
+    ]) ?>
 
     <?= $form->field($model, 'ticket_id')->textInput() ?>
 

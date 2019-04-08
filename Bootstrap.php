@@ -25,10 +25,27 @@ class Bootstrap implements BootstrapInterface
         // Add module URL rules
         $app->getUrlManager()->addRules(
             [
-                $prefix . '<module:tasks>/' => '<module>/list/all',
-                $prefix . '<module:tasks>/<controller:(list)>/' => '<module>/<controller>',
-                $prefix . '<module:tasks>/<controller:(list)>/<action:(all|my|current)>' => '<module>/<controller>/<action>',
-                $prefix . '<module:tasks>/<controller:(item)>/<action:(create|view|update|delete|set)>' => '<module>/<controller>/<action>',
+                $prefix . '<module:tasks>/' => '<module>/tasks/index',
+                $prefix . '<module:tasks>/view' => '<module>/tasks/view',
+                $prefix . '<module:tasks>/<controller:(list|item)>/' => '<module>/<controller>',
+                $prefix . '<module:tasks>/<controller:(list|item)>/<action:\w+>' => '<module>/<controller>/<action>',
+                [
+                    'pattern' => $prefix . '<module:tasks>/',
+                    'route' => '<module>/tasks/index',
+                    'suffix' => '',
+                ], [
+                    'pattern' => $prefix . '<module:tasks>/view',
+                    'route' => '<module>/tasks/view',
+                    'suffix' => '',
+                ], [
+                    'pattern' => $prefix . '<module:tasks>/<controller:(list|item)>/',
+                    'route' => '<module>/<controller>',
+                    'suffix' => '',
+                ], [
+                    'pattern' => $prefix . '<module:tasks>/<controller:(list|item)>/<action:\w+>',
+                    'route' => '<module>/<controller>/<action>',
+                    'suffix' => '',
+                ],
             ],
             true
         );

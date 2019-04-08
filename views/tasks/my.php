@@ -27,7 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'title',
-            'description:ntext',
+            [
+                'attribute' => 'description',
+                'format' => 'raw',
+                'value' => function($model) {
+                    return strip_tags($model->description);
+                }
+            ],
             [
                 'attribute' => 'ticket_id',
                 'format' => 'raw',
