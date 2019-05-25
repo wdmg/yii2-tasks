@@ -22,7 +22,7 @@
   ],
   "require": {
     "yiisoft/yii2": "^2.0.13",
-    "wdmg/yii2-helpers": "^1.0.2",
+    "wdmg/yii2-helpers": "^1.0.3",
     "wdmg/yii2-editor": "^1.0.3",
     "wdmg/yii2-datepicker": "^1.0.1"
   },
