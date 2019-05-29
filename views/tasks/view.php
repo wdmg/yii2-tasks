@@ -9,7 +9,7 @@ use wdmg\helpers\DateAndTime;
 /* @var $model wdmg\tasks\models\Tasks */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/tasks', 'Tasks'), 'url' => ['list/all']];
+$this->params['breadcrumbs'][] = ['label' => $this->context->module->name, 'url' => ['list/all']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

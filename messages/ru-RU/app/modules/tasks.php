@@ -3,6 +3,8 @@
 return [
 
     'Tasks' => 'Задачи',
+    'Support Task System' => 'Система задач поддержки',
+
     'All tasks' => 'Все задачи',
     'My tasks' => 'Мои задачи',
     'User tasks' => 'Задачи пользователя',
