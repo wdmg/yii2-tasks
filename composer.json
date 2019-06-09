@@ -1,10 +1,10 @@
 {
   "name": "wdmg/yii2-tasks",
-  "description": "Task manager for Yii2",
-  "keywords": ["yii2", "yii2-tasks", "tasks manager", "wdmg"],
+  "description": "Task manager",
+  "keywords": ["yii2", "yii2-tasks", "task manager", "wdmg"],
   "type": "yii2-extension",
   "license": "MIT",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "homepage": "https://github.com/wdmg/yii2-tasks",
   "support": {
     "source": "https://github.com/wdmg/yii2-tasks",
