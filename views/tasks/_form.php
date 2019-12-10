@@ -16,7 +16,7 @@ use wdmg\widgets\Editor;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->widget(Editor::className(), [
+    <?= $form->field($model, 'description')->widget(Editor::class, [
         'options' => [],
         'pluginOptions' => []
     ]) ?>
@@ -27,7 +27,7 @@ use wdmg\widgets\Editor;
 
     <?= $form->field($model, 'executor_id')->textInput() ?>
 
-    <?= $form->field($model, 'deadline_at')->widget(DatePicker::className(), [
+    <?= $form->field($model, 'deadline_at')->widget(DatePicker::class, [
         'options' => [
             'class' => 'form-control'
         ],
@@ -39,7 +39,7 @@ use wdmg\widgets\Editor;
         ]
     ]); ?>
 
-    <?= $form->field($model, 'started_at')->widget(DatePicker::className(), [
+    <?= $form->field($model, 'started_at')->widget(DatePicker::class, [
         'options' => [
             'class' => 'form-control'
         ],
@@ -51,7 +51,7 @@ use wdmg\widgets\Editor;
         ]
     ]); ?>
 
-    <?= $form->field($model, 'completed_at')->widget(DatePicker::className(), [
+    <?= $form->field($model, 'completed_at')->widget(DatePicker::class, [
         'options' => [
             'class' => 'form-control'
         ],

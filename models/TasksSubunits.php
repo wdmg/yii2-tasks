@@ -34,7 +34,7 @@ class TasksSubunits extends \yii\db\ActiveRecord
     {
         return [
             'timestamp' => [
-                'class' => TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
                 'attributes' => [
                     self::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     self::EVENT_BEFORE_UPDATE => 'updated_at',

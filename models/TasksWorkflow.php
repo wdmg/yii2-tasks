@@ -39,7 +39,7 @@ class TasksWorkflow extends \yii\db\ActiveRecord
     {
         return [
             'timestamp' => [
-                'class' => TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
                 'attributes' => [
                     self::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     self::EVENT_BEFORE_UPDATE => 'updated_at',
@@ -61,7 +61,7 @@ class TasksWorkflow extends \yii\db\ActiveRecord
             [['task_id', 'owner_id', 'assigned_id', 'status'], 'integer'],
             [['description'], 'string'],
             [['deadline_at', 'started_at', 'completed_at', 'created_at', 'updated_at'], 'safe'],
-            [['task_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tasks::className(), 'targetAttribute' => ['task_id' => 'id']],
+            [['task_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tasks::class, 'targetAttribute' => ['task_id' => 'id']],
         ];
     }
 
@@ -90,6 +90,6 @@ class TasksWorkflow extends \yii\db\ActiveRecord
      */
     public function getTask()
     {
-        return $this->hasOne(Tasks::className(), ['id' => 'task_id']);
+        return $this->hasOne(Tasks::class, ['id' => 'task_id']);
     }
 }

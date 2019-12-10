@@ -53,7 +53,7 @@ class Tasks extends \yii\db\ActiveRecord
     {
         return [
             'timestamp' => [
-                'class' => TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
                 'attributes' => [
                     self::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     self::EVENT_BEFORE_UPDATE => 'updated_at',
@@ -79,7 +79,7 @@ class Tasks extends \yii\db\ActiveRecord
         ];
 
         if(class_exists('\wdmg\tickets\models\Tickets') && isset(Yii::$app->modules['tickets']))
-            $rules[] = [['ticket_id'], 'exist', 'skipOnError' => true, 'targetClass' => \wdmg\tickets\models\Tickets::className(), 'targetAttribute' => ['ticket_id' => 'id']];
+            $rules[] = [['ticket_id'], 'exist', 'skipOnError' => true, 'targetClass' => \wdmg\tickets\models\Tickets::class, 'targetAttribute' => ['ticket_id' => 'id']];
 
         return $rules;
     }
@@ -110,7 +110,7 @@ class Tasks extends \yii\db\ActiveRecord
      */
     public function getTasksWorkflows()
     {
-        return $this->hasMany(TasksWorkflow::className(), ['task_id' => 'id']);
+        return $this->hasMany(TasksWorkflow::class, ['task_id' => 'id']);
     }
 
     /**
@@ -119,7 +119,7 @@ class Tasks extends \yii\db\ActiveRecord
     public function getTicket()
     {
         if(class_exists('\wdmg\tickets\models\Tickets') && isset(Yii::$app->modules['tickets']))
-            return $this->hasOne(\wdmg\tickets\models\Tickets::className(), ['id' => 'ticket_id']);
+            return $this->hasOne(\wdmg\tickets\models\Tickets::class, ['id' => 'ticket_id']);
         else
             return null;
     }
@@ -130,7 +130,7 @@ class Tasks extends \yii\db\ActiveRecord
     public function getOwner()
     {
         if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']))
-            return $this->hasOne(\wdmg\users\models\Users::className(), ['id' => 'owner_id']);
+            return $this->hasOne(\wdmg\users\models\Users::class, ['id' => 'owner_id']);
         else
             return null;
     }
@@ -141,7 +141,7 @@ class Tasks extends \yii\db\ActiveRecord
     public function getExecutor()
     {
         if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']))
-            return $this->hasOne(\wdmg\users\models\Users::className(), ['id' => 'executor_id']);
+            return $this->hasOne(\wdmg\users\models\Users::class, ['id' => 'executor_id']);
         else
             return null;
     }
@@ -152,7 +152,7 @@ class Tasks extends \yii\db\ActiveRecord
     public function getUser($user_id = null)
     {
         if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']) && !$user_id)
-            return $this->hasOne(\wdmg\users\models\Users::className(), ['id' => 'user_id']);
+            return $this->hasOne(\wdmg\users\models\Users::class, ['id' => 'user_id']);
         else if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']) && $user_id)
             return \wdmg\users\models\Users::findOne(['id' => intval($user_id)]);
         else
