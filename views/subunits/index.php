@@ -37,6 +37,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        'pager' => [
+            'options' => [
+                'class' => 'pagination',
+            ],
+            'maxButtonCount' => 5,
+            'activePageCssClass' => 'active',
+            'prevPageCssClass' => '',
+            'nextPageCssClass' => '',
+            'firstPageCssClass' => 'previous',
+            'lastPageCssClass' => 'next',
+            'firstPageLabel' => Yii::t('app/modules/tasks', 'First page'),
+            'lastPageLabel'  => Yii::t('app/modules/tasks', 'Last page'),
+            'prevPageLabel'  => Yii::t('app/modules/tasks', '&larr; Prev page'),
+            'nextPageLabel'  => Yii::t('app/modules/tasks', 'Next page &rarr;')
+        ],
     ]); ?>
     <?php Pjax::end(); ?>
 </div>
