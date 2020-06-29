@@ -69,13 +69,13 @@ class ListController extends Controller
         $required = array();
         $session = Yii::$app->session;
 
-        if(!isset(Yii::$app->extensions['wdmg/yii2-users']) && !$this->module->moduleLoaded('users'))
+        if (!$this->module->moduleLoaded('users'))
             $required[] = '«Users»';
 
-        if(!isset(Yii::$app->extensions['wdmg/yii2-tickets']) && !$this->module->moduleLoaded('tickets'))
+        if (!$this->module->moduleLoaded('tickets'))
             $required[] = '«Tickets»';
 
-        if(isset($session['viewed-flash']) && is_array($session['viewed-flash']))
+        if (isset($session['viewed-flash']) && is_array($session['viewed-flash']))
             $viewed = $session['viewed-flash'];
 
         if(count($required) > 0 && !in_array('tasks-need-modules', $viewed) && is_array($viewed)) {
@@ -93,9 +93,7 @@ class ListController extends Controller
             $session['viewed-flash'] = array_merge(array_unique($viewed), ['tasks-need-modules']);
         }
 
-        // Set custom view path
         parent::setViewPath('@vendor/wdmg/yii2-tasks/views/tasks');
-
         return parent::beforeAction($action);
     }
 

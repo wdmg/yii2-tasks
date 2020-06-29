@@ -63,16 +63,16 @@ class WorkflowController extends Controller
         $modules = array();
         $session = Yii::$app->session;
 
-        if(!isset(Yii::$app->modules['users']))
+        if (!$this->module->moduleLoaded('users'))
             $modules[] = '«Users»';
 
-        if(!isset(Yii::$app->modules['tickets']))
+        if (!$this->module->moduleLoaded('tickets'))
             $modules[] = '«Tickets»';
 
-        if(isset($session['viewed-flash']) && is_array($session['viewed-flash']))
+        if (isset($session['viewed-flash']) && is_array($session['viewed-flash']))
             $viewed = $session['viewed-flash'];
 
-        if(count($modules) > 0 && !in_array('tasks-need-modules', $viewed) && is_array($viewed)) {
+        if (count($modules) > 0 && !in_array('tasks-need-modules', $viewed) && is_array($viewed)) {
             Yii::$app->getSession()->setFlash(
                 'warning',
                 Yii::t(

@@ -3,6 +3,7 @@
 namespace wdmg\tasks\models;
 
 use Yii;
+use \wdmg\base\models\ActiveRecord;
 use \yii\behaviors\TimeStampBehavior;
 
 /**
@@ -22,7 +23,7 @@ use \yii\behaviors\TimeStampBehavior;
  *
  * @property Tasks $task
  */
-class TasksWorkflow extends \yii\db\ActiveRecord
+class TasksWorkflow extends ActiveRecord
 {
     /**
      * {@inheritdoc}

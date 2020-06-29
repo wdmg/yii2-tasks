@@ -3,6 +3,7 @@
 namespace wdmg\tasks\models;
 
 use Yii;
+use \wdmg\base\models\ActiveRecord;
 use \yii\behaviors\TimeStampBehavior;
 
 /**
@@ -17,7 +18,7 @@ use \yii\behaviors\TimeStampBehavior;
  * @property string $updated_at
  * @property int $status
  */
-class TasksSubunits extends \yii\db\ActiveRecord
+class TasksSubunits extends ActiveRecord
 {
     /**
      * {@inheritdoc}
