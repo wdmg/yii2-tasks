@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     if($model->ticket_id == $model->ticket['id'])
                         if($model->ticket['id'] && $model->ticket['subject'])
-                            return Html::a($model->ticket['subject'], ['../admin/tickets/item/view/?id='.$model->ticket['id']], [
+                            return Html::a($model->ticket['subject'], ['../tickets/item/view', 'id' => $model->ticket['id']], [
                                 'target' => '_blank',
                                 'data-pjax' => 0
                             ]);
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     if($model->owner_id == $model->owner['id'])
                         if($model->owner['id'] && $model->owner['username'])
-                            return Html::a($model->owner['username'], ['../admin/users/view/?id='.$model->owner['id']], [
+                            return Html::a($model->owner['username'], ['../users/users/view', 'id' => $model->owner['id']], [
                                 'target' => '_blank',
                                 'data-pjax' => 0
                             ]);
@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     if($model->executor_id == $model->executor['id'])
                         if($model->executor['id'] && $model->executor['username'])
-                            return Html::a($model->executor['username'], ['../admin/users/view/?id='.$model->executor['id']], [
+                            return Html::a($model->executor['username'], ['../users/users/view', 'id' => $model->executor['id']], [
                                 'target' => '_blank',
                                 'data-pjax' => 0
                             ]);

@@ -1,5 +1,6 @@
 <?php
 
+use wdmg\widgets\SelectInput;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -41,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     if($model->ticket_id == $model->ticket['id'])
                         if($model->ticket['id'] && $model->ticket['subject'])
-                            return Html::a($model->ticket['subject'], ['../admin/tickets/item/view/?id='.$model->ticket['id']], [
+                            return Html::a($model->ticket['subject'], ['../tickets/item/view', 'id' => $model->ticket['id']], [
                                 'target' => '_blank',
                                 'data-pjax' => 0
                             ]);
@@ -58,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     if($model->executor_id == $model->executor['id'])
                         if($model->executor['id'] && $model->executor['username'])
-                            return Html::a($model->executor['username'], ['../admin/users/view/?id='.$model->executor['id']], [
+                            return Html::a($model->executor['username'], ['../users/users/view', 'id' => $model->executor['id']], [
                                 'target' => '_blank',
                                 'data-pjax' => 0
                             ]);
@@ -102,7 +103,15 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'format' => 'html',
-                'filter' => false,
+                'filter' => SelectInput::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'status',
+                    'items' => $searchModel->getStatusesList(true),
+                    'options' => [
+                        'id' => 'pages-status',
+                        'class' => 'form-control'
+                    ]
+                ]),
                 'headerOptions' => [
                     'class' => 'text-center'
                 ],
@@ -173,7 +182,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
     <div>
-        <?= Html::a(Yii::t('app/modules/tasks', 'Add new task'), ['item/create'], ['class' => 'btn btn-success pull-right']) ?>
+        <?= Html::a(Yii::t('app/modules/tasks', 'Add new task'), ['item/create'], ['class' => 'btn btn-add btn-success pull-right']) ?>
     </div>
     <?php Pjax::end(); ?>
 </div>

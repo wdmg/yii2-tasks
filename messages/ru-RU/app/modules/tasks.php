@@ -34,12 +34,23 @@ return [
     'Status' => 'Статус',
     'Actions' => 'Действия',
 
+    'Users' => 'Пользователи',
+    'Active' => 'Активно',
+    'Not active' => 'Не активно',
+
+    'All statuses' => 'Все статусы',
     'Wating' => 'В ожидании',
     'Progress' => 'В процессе',
     'Complete' => 'Завершено',
     'Unsuccessfully' => 'Не выполнено',
     'Suspended' => 'Остановлено',
     'Canceled' => 'Отменено',
+
+    'Tasks list' => 'Список задач',
+    'Subunits list' => 'Список подразделений',
+
+    'Subdivisions' => 'Подразделения',
+    'Create subdivision' => 'Создать подразделение',
 
     'View task: {name}' => 'Просмотр задачи: {name}',
     'Update task: {name}' => 'Редактирование задачи: {name}',

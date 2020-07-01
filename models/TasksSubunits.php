@@ -5,6 +5,7 @@ namespace wdmg\tasks\models;
 use Yii;
 use \wdmg\base\models\ActiveRecord;
 use \yii\behaviors\TimeStampBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "tasks_subunits".
@@ -21,12 +22,33 @@ use \yii\behaviors\TimeStampBehavior;
 class TasksSubunits extends ActiveRecord
 {
     /**
+     * Subdivision status
+     * const, int: 10 - Not Active, 20 - Active
+     */
+    const SUB_STATUS_DISABLE = 10;
+    const SUB_STATUS_ACTIVE = 20;
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return '{{%tasks_subunits}}';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function init()
+    {
+        parent::init();
+        $this->_module = parent::getModule(true);
+    }
+
+    /**
+     * @var Instance of current module
+     */
+    private $_module;
 
     /**
      * {@inheritdoc}
@@ -76,5 +98,72 @@ class TasksSubunits extends ActiveRecord
             'updated_at' => Yii::t('app/modules/tasks', 'Updated At'),
             'status' => Yii::t('app/modules/tasks', 'Status'),
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function afterFind()
+    {
+
+        if (is_string($this->users_id))
+            $this->users_id = \explode(',', $this->users_id);
+
+        parent::afterFind();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function beforeSave($insert)
+    {
+        if (is_array($this->users_id))
+            $this->users_id = \implode(',', $this->users_id);
+
+        return parent::beforeSave($insert);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        if (class_exists('\wdmg\users\models\Users') && $this->_module->moduleLoaded('users'))
+            return $this->hasMany(\wdmg\users\models\Users::class, ['id' => 'users_id']);
+        else
+            return null;
+
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOwner()
+    {
+        if (class_exists('\wdmg\users\models\Users') && $this->_module->moduleLoaded('users'))
+            return $this->hasOne(\wdmg\users\models\Users::class, ['id' => 'owner_id']);
+        else
+            return null;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getStatusesList($allStatuses = false)
+    {
+        $list = [];
+        if ($allStatuses) {
+            $list = [
+                '*' => Yii::t('app/modules/tasks', 'All statuses')
+            ];
+        }
+
+        $list = ArrayHelper::merge($list, [
+            self::SUB_STATUS_DISABLE => Yii::t('app/modules/tasks','Not active'),
+            self::SUB_STATUS_ACTIVE => Yii::t('app/modules/tasks','Active'),
+        ]);
+
+        return $list;
     }
 }

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 $this->title = Yii::t('app/modules/tasks', 'Create subunits');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/tasks', 'Tasks'), 'url' => ['../tasks']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/tasks', 'Tasks Subunits'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/tasks', 'Subdivisions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-header">

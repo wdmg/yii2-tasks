@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use wdmg\widgets\DatePicker;
+use wdmg\widgets\SelectInput;
 use wdmg\widgets\Editor;
 
 /* @var $this yii\web\View */
@@ -29,6 +30,7 @@ use wdmg\widgets\Editor;
 
     <?= $form->field($model, 'deadline_at')->widget(DatePicker::class, [
         'options' => [
+            'id' => 'task-form-deadline_at',
             'class' => 'form-control'
         ],
         'pluginOptions' => [
@@ -41,6 +43,7 @@ use wdmg\widgets\Editor;
 
     <?= $form->field($model, 'started_at')->widget(DatePicker::class, [
         'options' => [
+            'id' => 'task-form-started_at',
             'class' => 'form-control'
         ],
         'pluginOptions' => [
@@ -53,6 +56,7 @@ use wdmg\widgets\Editor;
 
     <?= $form->field($model, 'completed_at')->widget(DatePicker::class, [
         'options' => [
+            'id' => 'task-form-completed_at',
             'class' => 'form-control'
         ],
         'pluginOptions' => [
@@ -63,19 +67,18 @@ use wdmg\widgets\Editor;
         ]
     ]); ?>
 
-    <?= $form->field($model, 'status')->dropDownList([
-        $model::TS_STATUS_WATING => Yii::t('app/modules/tasks','Wating'),
-        $model::TS_STATUS_PROGRESS => Yii::t('app/modules/tasks','Progress'),
-        $model::TS_STATUS_COMPLETE => Yii::t('app/modules/tasks','Complete'),
-        $model::TS_STATUS_UNSUCCESS => Yii::t('app/modules/tasks','Unsuccessfully'),
-        $model::TS_STATUS_SUSPENDED => Yii::t('app/modules/tasks','Suspended'),
-        $model::TS_STATUS_CANCELED => Yii::t('app/modules/tasks','Canceled'),
+    <?= $form->field($model, 'status')->widget(SelectInput::class, [
+        'items' => $model->getStatusesList(),
+        'options' => [
+            'id' => 'task-form-status',
+            'class' => 'form-control'
+        ]
     ]); ?>
 
     <hr/>
     <div class="form-group">
         <?= Html::a(Yii::t('app/modules/tasks', '&larr; Back to list'), ['list/all'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
-        <?= Html::submitButton(Yii::t('app/modules/tasks', 'Save'), ['class' => 'btn btn-success pull-right']) ?>
+        <?= Html::submitButton(Yii::t('app/modules/tasks', 'Save'), ['class' => 'btn btn-save btn-success pull-right']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

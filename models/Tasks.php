@@ -5,6 +5,7 @@ namespace wdmg\tasks\models;
 use Yii;
 use \wdmg\base\models\ActiveRecord;
 use \yii\behaviors\TimeStampBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "tasks".
@@ -118,6 +119,30 @@ class Tasks extends ActiveRecord
             'updated_at' => Yii::t('app/modules/tasks', 'Updated At'),
             'status' => Yii::t('app/modules/tasks', 'Status'),
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getStatusesList($allStatuses = false)
+    {
+        $list = [];
+        if ($allStatuses) {
+            $list = [
+                '*' => Yii::t('app/modules/tasks', 'All statuses')
+            ];
+        }
+
+        $list = ArrayHelper::merge($list, [
+            self::TS_STATUS_WATING => Yii::t('app/modules/tasks','Wating'),
+            self::TS_STATUS_PROGRESS => Yii::t('app/modules/tasks','Progress'),
+            self::TS_STATUS_COMPLETE => Yii::t('app/modules/tasks','Complete'),
+            self::TS_STATUS_UNSUCCESS => Yii::t('app/modules/tasks','Unsuccessfully'),
+            self::TS_STATUS_SUSPENDED => Yii::t('app/modules/tasks','Suspended'),
+            self::TS_STATUS_CANCELED => Yii::t('app/modules/tasks','Canceled'),
+        ]);
+
+        return $list;
     }
 
     /**

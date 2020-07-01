@@ -6,7 +6,7 @@ namespace wdmg\tasks;
  * Yii2 Tasks
  *
  * @category        Module
- * @version         1.1.8
+ * @version         1.1.9
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-tasks
  * @copyright       Copyright (c) 2019 - 2020 W.D.M.Group, Ukraine
@@ -45,7 +45,7 @@ class Module extends BaseModule
     /**
      * @var string the module version
      */
-    private $version = "1.1.8";
+    private $version = "1.1.9";
 
     /**
      * @var integer, priority of initialization
@@ -78,7 +78,27 @@ class Module extends BaseModule
             'icon' => 'fa fa-fw fa-tasks',
             'active' => in_array(\Yii::$app->controller->module->id, [$this->id])
         ];
-        return $items;
+
+
+
+        return [
+            'label' => $this->name,
+            'url' => [$this->routePrefix . '/'. $this->id],
+            'icon' => 'fa fa-fw fa-tasks',
+            'active' => in_array(\Yii::$app->controller->module->id, [$this->id]),
+            'items' => [
+                [
+                    'label' => Yii::t('app/modules/tasks', 'Tasks list'),
+                    'url' => [$this->routePrefix . '/tasks/list/all'],
+                    'active' => (in_array(\Yii::$app->controller->module->id, ['list']) &&  Yii::$app->controller->id == 'all'),
+                ],
+                [
+                    'label' => Yii::t('app/modules/tasks', 'Subunits list'),
+                    'url' => [$this->routePrefix . '/tasks/subunits/index'],
+                    'active' => (in_array(\Yii::$app->controller->module->id, ['subunits']) &&  Yii::$app->controller->id == 'index'),
+                ]
+            ]
+        ];
     }
 
     /**
