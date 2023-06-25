@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'header' => Yii::t('app/modules/tasks', 'Users'),
                 'value' => function($model) {
-                    if (is_countable($model->users)) {
+                    if (is_array($model->users)) {
 
                         $output = '';
                         foreach ($model->users as $user) {
@@ -114,10 +114,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'maxButtonCount' => 5,
             'activePageCssClass' => 'active',
-            'prevPageCssClass' => 'prev',
-            'nextPageCssClass' => 'next',
-            'firstPageCssClass' => 'first',
-            'lastPageCssClass' => 'last',
+            'prevPageCssClass' => '',
+            'nextPageCssClass' => '',
+            'firstPageCssClass' => 'previous',
+            'lastPageCssClass' => 'next',
             'firstPageLabel' => Yii::t('app/modules/tasks', 'First page'),
             'lastPageLabel'  => Yii::t('app/modules/tasks', 'Last page'),
             'prevPageLabel'  => Yii::t('app/modules/tasks', '&larr; Prev page'),

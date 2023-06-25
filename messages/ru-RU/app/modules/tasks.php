@@ -60,6 +60,7 @@ return [
     'Task has been successfully created!' => 'Задача была успешно создана!',
     'An error occurred while creating the task.' => 'Произошла ошибка при создании задачи.',
 
+	'New tasks in the last 24 hours' => 'Новых задач за последние сутки',
 
     'Update' => 'Обновить',
     'Edit' => 'Редактировать',

@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'label' => Yii::t('app/modules/tasks', 'Users'),
                 'value' => function($model) {
-                    if (is_countable($model->users)) {
+                    if (is_array($model->users)) {
 
                         $output = '';
                         foreach ($model->users as $user) {
